@@ -2,13 +2,13 @@
 WebScraper based on selenium
 
 Harmonogram pracy:
-Przygotowanie webDriver Selenium dla java
+[]Przygotowanie webDriver Selenium dla java
 
-Pobieranie przykładowej strony
+[]Pobieranie przykładowej strony
 
-Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
+[]Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
 
-wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
+[]wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
 
