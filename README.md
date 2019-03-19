@@ -18,3 +18,9 @@ Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się 
 
 
 podział prac:
+
+- Jan Śmigielski
+
+- Cezary Czekalski
+
+- Marcin Hilt
