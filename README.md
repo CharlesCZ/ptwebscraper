@@ -1,7 +1,7 @@
-# ptwebscraper
+ # ptwebscraper
 WebScraper based on selenium
 
-# Harmonogram pracy:
+Harmonogram pracy:
 Przygotowanie webDriver Selenium dla java
 
 Pobieranie przykładowej strony
