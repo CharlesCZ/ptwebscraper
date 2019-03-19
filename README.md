@@ -12,7 +12,7 @@ Harmonogram pracy:
 - [ ] wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
-- [ ] Prezentacja winików 
+- [ ] Prezentacja wyników przeszukiwania
 
 
 Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się z tematem jednego z członków zespołu
