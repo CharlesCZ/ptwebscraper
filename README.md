@@ -20,9 +20,9 @@ Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się 
 
 podział prac:
 
-- Jan Śmigielski @sjdevpl- Wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
+- Jan Śmigielski- Wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
-- Cezary Czekalski @CharlesCZ- Przygotowanie webDriver Selenium dla java
+- Cezary Czekalski- Przygotowanie webDriver Selenium dla java
 
 - Marcin Hilt- Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
