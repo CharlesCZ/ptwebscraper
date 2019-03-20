@@ -15,7 +15,8 @@ m.in. www.aniagotuje.pl, www.simplyrecipes.com
 - [ ] Prezentacja wyników przeszukiwania
 
 
-Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się z tematem jednego z członków zespołu
+Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się z tematem jednego z członków zespołu,
+chęć zaznajomienia się z obsługą selenium.
 
 
 podział prac:
