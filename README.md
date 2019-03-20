@@ -1,6 +1,11 @@
  # ptwebscraper
 WebScraper based on selenium
 
+Zespół
+- Jan Śmigielski
+- Cezary Czekalski
+- Marcin Hilt
+
 Harmonogram pracy:
 
 - [ ] Przygotowanie webDriver Selenium dla java
