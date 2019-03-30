@@ -10,7 +10,7 @@ Harmonogram pracy:
 
 - [x] Przygotowanie webDriver Selenium dla java
 
-- [ ] Pobieranie przykładowej strony
+- [x] Pobieranie przykładowej strony
 
 - [ ] Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
 
