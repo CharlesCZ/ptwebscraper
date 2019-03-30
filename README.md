@@ -8,7 +8,7 @@ Zespół
 
 Harmonogram pracy:
 
-- [ ] Przygotowanie webDriver Selenium dla java
+- [x] Przygotowanie webDriver Selenium dla java
 
 - [ ] Pobieranie przykładowej strony
 
