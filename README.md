@@ -32,3 +32,5 @@ m.in. www.aniagotuje.pl, www.simplyrecipes.com
 - Cezary Czekalski- Przygotowanie webDriver Selenium dla java
 
 - Marcin Hilt- Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
+
+https://docs.google.com/document/d/1S2C7Ds7FapP_0Dr376LfME6wEltQt6u_K9ggmCtPQ7E/edit#heading=h.wtklqxokajis
