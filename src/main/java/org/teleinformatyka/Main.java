@@ -20,6 +20,7 @@ public class Main {
 
     // pobiera przepis każdy przepis z 1 strony tylko raz i wpisuje składniki
     public static void main(String[] args) throws InterruptedException {
+        BasicConfigurator.configure();
         String projectPath = System.getProperty("user.dir");
         System.out.println(projectPath);
         System.out.println(projectPath + "/drivers/chromedriver/chromedriver.exe");
@@ -54,7 +55,7 @@ public class Main {
             Thread.sleep(3000);
             driver.navigate().back();
         }
-
+///
        /*Thread.sleep(3000);
        for (int i = 1; i < 4; i++) {
            driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + i + "']")).click();
