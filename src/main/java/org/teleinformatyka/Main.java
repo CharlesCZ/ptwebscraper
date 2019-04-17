@@ -6,11 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,14 +21,17 @@ public class Main {
 
     static final Logger logger = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+
+
         BasicConfigurator.configure();
         logger.info("rozpoczecie webscraping");
         String projectPath = System.getProperty("user.dir");
         logger.info(projectPath);
         logger.info(projectPath + "/drivers/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+
         //String url = "/przepis/jajka-faszerowane-tunczykiem";
         //int strona = 0;
         driver.get("https://aniagotuje.pl");
@@ -75,6 +81,28 @@ public class Main {
                 .filter(s -> !s.contains("#"))
                 .distinct()
                 .collect(Collectors.toList());
+
+
+
+
+
+        // Step #1. Create a file object.
+        File file = new File(System.getProperty("user.dir") + "/drivers/chromedriver/przepisy.txt");
+        // Step #2. Create a file writer object with above file.
+        FileWriter fileWriter = new FileWriter(file);
+        // Step #3. Create a file object with above file writer.
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+
+        // Step #4. Prepare data to be stored in above file.
+       // String message = "Hello World ";
+
+
+
+
+
+
+
+
         for (int i = 0; i < recipesLinkList1.size(); i++) {
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
@@ -82,19 +110,27 @@ public class Main {
             List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
             for (WebElement naz : nazwy) {
                 System.out.println(naz.getText()+"\n");
+                // Step #5. Perform write operation.
+                writer.write(naz.getText()+"\n");
                 for (WebElement skla : skladniki) {
 
                     System.out.println("Skladniki: \n" + skla.getText());
-
+                    writer.write("Skladniki: \n" + skla.getText());
                 }
                 System.out.println();
-                Thread.sleep(3000);
                 driver.navigate().back();
 
 
             }
         }
-        Thread.sleep(3000);
+
+
+
+        // Step #6. free the resources.
+        writer.close();
+
+
+
         driver.close();
         logger.info("webscraping zakonczony");
     }
