@@ -18,52 +18,82 @@ public class Main {
 
     static final Logger logger = Logger.getLogger(Main.class);
 
-    // pobiera przepis każdy przepis z 1 strony tylko raz i wpisuje składniki
     public static void main(String[] args) throws InterruptedException {
-        BasicConfigurator.configure();
         String projectPath = System.getProperty("user.dir");
         System.out.println(projectPath);
         System.out.println(projectPath + "/drivers/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //String url = "/przepis/jajka-faszerowane-tunczykiem";
-
+        //int strona = 0;
         driver.get("https://aniagotuje.pl");
 
         List<WebElement> listOfInputElements = driver.findElements(By.tagName("a"));
 
-        List<String> recipesLinkList= listOfInputElements.stream()
+        List<String> recipesLinkList = listOfInputElements.stream()
                 .map(webElement -> webElement.getAttribute("href"))
                 .filter(Objects::nonNull)
-                .filter(s ->!s.contains("przepisy"))
+                .filter(s -> !s.contains("przepisy"))
                 .filter(s -> s.contains("https://aniagotuje.pl/przepis"))
                 .filter(s -> !s.contains("#"))
                 .distinct()
                 .collect(Collectors.toList());
 
-        for(int i=0; i<recipesLinkList.size();i++) {
+        for (int i = 0; i < recipesLinkList.size(); i++) {
             String name = recipesLinkList.get(i);
             driver.navigate().to(name);
+            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
+            for (WebElement naz : nazwy) {
+                System.out.println(naz.getText()+"\n");
+
+                List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
+
+                for (WebElement skla : skladniki) {
+
+                    System.out.println("Skladniki: \n" + skla.getText());
+
+                }
+                System.out.println();
+                Thread.sleep(3000);
+                driver.navigate().back();
+            }
+        }
+        driver.navigate().to("https://aniagotuje.pl/page/1");
+        // strona ++;
+        // driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + strona + "']")).click();
+
+
+        List<WebElement> listOfInputElements1 = driver.findElements(By.tagName("a"));
+
+        List<String> recipesLinkList1 = listOfInputElements1.stream()
+                .map(webElement -> webElement.getAttribute("href"))
+                .filter(Objects::nonNull)
+                .filter(s -> !s.contains("przepisy"))
+                .filter(s -> s.contains("https://aniagotuje.pl/przepis"))
+                .filter(s -> !s.contains("#"))
+                .distinct()
+                .collect(Collectors.toList());
+        for (int i = 0; i < recipesLinkList1.size(); i++) {
+            String name = recipesLinkList1.get(i);
+            driver.navigate().to(name);
             List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
+            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
+            for (WebElement naz : nazwy) {
+                System.out.println(naz.getText()+"\n");
+                for (WebElement skla : skladniki) {
 
-            for (WebElement skla : skladniki) {
+                    System.out.println("Skladniki: \n" + skla.getText());
 
-                System.out.println( "Skladniki: \n"+skla.getText());
+                }
+                System.out.println();
+                Thread.sleep(3000);
+                driver.navigate().back();
+
 
             }
-            System.out.println();
-            Thread.sleep(3000);
-            driver.navigate().back();
         }
-///
-       /*Thread.sleep(3000);
-       for (int i = 1; i < 4; i++) {
-           driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + i + "']")).click();
-           Thread.sleep(3000);
-       } // "przegląda pierwsze 4 strony
-
-       Thread.sleep(3000);*/
-
-
+        Thread.sleep(3000);
+        driver.close();
+        logger.info("webscraping zakonczony");
     }
 }
