@@ -19,9 +19,11 @@ public class Main {
     static final Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) throws InterruptedException {
+        BasicConfigurator.configure();
+        logger.info("rozpoczecie webscraping");
         String projectPath = System.getProperty("user.dir");
-        System.out.println(projectPath);
-        System.out.println(projectPath + "/drivers/chromedriver/chromedriver.exe");
+        logger.info(projectPath);
+        logger.info(projectPath + "/drivers/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //String url = "/przepis/jajka-faszerowane-tunczykiem";
