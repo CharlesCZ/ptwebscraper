@@ -36,7 +36,7 @@ public class Main {
         //int strona = 0;
         driver.get("https://aniagotuje.pl");
 
-        List<WebElement> listOfInputElements = driver.findElements(By.tagName("a"));
+     /*   List<WebElement> listOfInputElements = driver.findElements(By.tagName("a"));
 
         List<String> recipesLinkList = listOfInputElements.stream()
                 .map(webElement -> webElement.getAttribute("href"))
@@ -65,7 +65,7 @@ public class Main {
                 Thread.sleep(3000);
                 driver.navigate().back();
             }
-        }
+        }*/
         driver.navigate().to("https://aniagotuje.pl/page/1");
         // strona ++;
         // driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + strona + "']")).click();
@@ -94,15 +94,6 @@ public class Main {
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
         // Step #4. Prepare data to be stored in above file.
-       // String message = "Hello World ";
-
-
-
-
-
-
-
-
         for (int i = 0; i < recipesLinkList1.size(); i++) {
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
@@ -111,13 +102,14 @@ public class Main {
             for (WebElement naz : nazwy) {
                 System.out.println(naz.getText()+"\n");
                 // Step #5. Perform write operation.
-                writer.write(naz.getText()+"\n");
+                writer.write("\n"+naz.getText()+"\n\n");
                 for (WebElement skla : skladniki) {
 
                     System.out.println("Skladniki: \n" + skla.getText());
                     writer.write("Skladniki: \n" + skla.getText());
                 }
                 System.out.println();
+                writer.write("\n\n");
                 driver.navigate().back();
 
 
