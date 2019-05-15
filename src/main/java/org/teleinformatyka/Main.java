@@ -32,43 +32,12 @@ public class Main {
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
         WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
 
-        //String url = "/przepis/jajka-faszerowane-tunczykiem";
-        //int strona = 0;
+
         driver.get("https://aniagotuje.pl");
 
-     /*   List<WebElement> listOfInputElements = driver.findElements(By.tagName("a"));
 
-        List<String> recipesLinkList = listOfInputElements.stream()
-                .map(webElement -> webElement.getAttribute("href"))
-                .filter(Objects::nonNull)
-                .filter(s -> !s.contains("przepisy"))
-                .filter(s -> s.contains("https://aniagotuje.pl/przepis"))
-                .filter(s -> !s.contains("#"))
-                .distinct()
-                .collect(Collectors.toList());
-
-        for (int i = 0; i < recipesLinkList.size(); i++) {
-            String name = recipesLinkList.get(i);
-            driver.navigate().to(name);
-            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
-            for (WebElement naz : nazwy) {
-                System.out.println(naz.getText()+"\n");
-
-                List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
-
-                for (WebElement skla : skladniki) {
-
-                    System.out.println("Skladniki: \n" + skla.getText());
-
-                }
-                System.out.println();
-                Thread.sleep(3000);
-                driver.navigate().back();
-            }
-        }*/
         driver.navigate().to("https://aniagotuje.pl/page/1");
-        // strona ++;
-        // driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + strona + "']")).click();
+
 
 
         List<WebElement> listOfInputElements1 = driver.findElements(By.tagName("a"));
@@ -97,17 +66,28 @@ public class Main {
         for (int i = 0; i < recipesLinkList1.size(); i++) {
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
-            List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
-            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
-            for (WebElement naz : nazwy) {
+//            List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
+            List<WebElement> skladniki = schemaOrgParser.getRecipeIngredient(driver);
+            List<WebElement> calories = schemaOrgParser.getElementsByItemProp(driver, "calories");
+            List<WebElement> description = schemaOrgParser.getElementsByItemProp(driver, "description");
+
+            List<WebElement> nazwyPrzepisow = driver.findElements(By.xpath("//h1[@itemprop='name']"));
+
+            for (WebElement naz : nazwyPrzepisow) {
                 System.out.println(naz.getText()+"\n");
                 // Step #5. Perform write operation.
                 writer.write("\n"+naz.getText()+"\n\n");
-                for (WebElement skla : skladniki) {
+                schemaOrgParser.printElements(skladniki, "Skladniki");
+                schemaOrgParser.printElements(calories,"Kalorie");
+                schemaOrgParser.printElements(description,"Opis");
 
-                    System.out.println("Skladniki: \n" + skla.getText());
-                    writer.write("Skladniki: \n" + skla.getText());
-                }
+//                for (WebElement skla : skladniki) {
+//
+//                    System.out.println("Skladniki: \n" + skla.getText());
+//                    writer.write("Skladniki: \n" + skla.getText());
+//
+//                }
+
                 System.out.println();
                 writer.write("\n\n");
                 driver.navigate().back();
