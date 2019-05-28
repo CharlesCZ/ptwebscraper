@@ -24,6 +24,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
 
+
         BasicConfigurator.configure();
         logger.info("rozpoczecie webscraping");
         String projectPath = System.getProperty("user.dir");
@@ -32,12 +33,37 @@ public class Main {
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
         WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
 
+        //String url = "/przepis/jajka-faszerowane-tunczykiem";
+        //int strona = 0;
+    /*    driver.get("https://aniagotuje.pl");
 
-        driver.get("https://aniagotuje.pl");
-
-
+        List<WebElement> listOfInputElements = driver.findElements(By.tagName("a"));
+        List<String> recipesLinkList = listOfInputElements.stream()
+                .map(webElement -> webElement.getAttribute("href"))
+                .filter(Objects::nonNull)
+                .filter(s -> !s.contains("przepisy"))
+                .filter(s -> s.contains("https://aniagotuje.pl/przepis"))
+                .filter(s -> !s.contains("#"))
+                .distinct()
+                .collect(Collectors.toList());
+        for (int i = 0; i < recipesLinkList.size(); i++) {
+            String name = recipesLinkList.get(i);
+            driver.navigate().to(name);
+            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
+            for (WebElement naz : nazwy) {
+                System.out.println(naz.getText()+"\n");
+                List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
+                for (WebElement skla : skladniki) {
+                    System.out.println("Skladniki: \n" + skla.getText());
+                }
+                System.out.println();
+                Thread.sleep(3000);
+                driver.navigate().back();
+            }
+        }
         driver.navigate().to("https://aniagotuje.pl/page/1");
-
+        // strona ++;
+        // driver.findElement(By.className("page-item")).findElement(By.xpath("//a[@href='/page/" + strona + "']")).click();
 
 
         List<WebElement> listOfInputElements1 = driver.findElements(By.tagName("a"));
@@ -66,28 +92,17 @@ public class Main {
         for (int i = 0; i < recipesLinkList1.size(); i++) {
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
-//            List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
-            List<WebElement> skladniki = schemaOrgParser.getRecipeIngredient(driver);
-            List<WebElement> calories = schemaOrgParser.getElementsByItemProp(driver, "calories");
-            List<WebElement> description = schemaOrgParser.getElementsByItemProp(driver, "description");
-
-            List<WebElement> nazwyPrzepisow = driver.findElements(By.xpath("//h1[@itemprop='name']"));
-
-            for (WebElement naz : nazwyPrzepisow) {
+            List<WebElement> skladniki = driver.findElements(By.className("recipe-ing-list"));
+            List<WebElement> nazwy = driver.findElements(By.xpath("//h1[@itemprop='name']"));
+            for (WebElement naz : nazwy) {
                 System.out.println(naz.getText()+"\n");
                 // Step #5. Perform write operation.
                 writer.write("\n"+naz.getText()+"\n\n");
-                schemaOrgParser.printElements(skladniki, "Skladniki");
-                schemaOrgParser.printElements(calories,"Kalorie");
-                schemaOrgParser.printElements(description,"Opis");
+                for (WebElement skla : skladniki) {
 
-//                for (WebElement skla : skladniki) {
-//
-//                    System.out.println("Skladniki: \n" + skla.getText());
-//                    writer.write("Skladniki: \n" + skla.getText());
-//
-//                }
-
+                    System.out.println("Skladniki: \n" + skla.getText());
+                    writer.write("Skladniki: \n" + skla.getText());
+                }
                 System.out.println();
                 writer.write("\n\n");
                 driver.navigate().back();
@@ -102,7 +117,30 @@ public class Main {
         writer.close();
 
 
+*/
 
+        //simplerecipes;
+        driver.get("https://www.simplyrecipes.com/recipes/pasta_with_spinach_artichokes_and_ricotta/");
+
+RecipeTags recipeTags=new RecipeTags();
+recipeTags.setTitleClass(".recipe-callout");
+recipeTags.setIngredientsClass(".entry-details.recipe-ingredients");
+recipeTags.setInstructionsClass(".entry-details.recipe-method.instructions");
+        System.out.println("\n"+"Tytuł"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).findElement(By.tagName("h2")).getText());
+        System.out.println("\n"+"Skladniki"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
+        System.out.println("\n"+"Skladniki"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
+
+
+ /*       recipeTags.setTitleXpath("//h2[contains(text(),'Pasta with Spinach, Artichokes and Ricotta Recipe')]");
+recipeTags.setIngredientXpath("//div[@class='entry-details recipe-ingredients']");
+recipeTags.setInstructionsXpath("//div[@id='sr-recipe-method']");
+
+
+        System.out.println("Tytuł"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getTitleXpath()).getText());
+        System.out.println("Skladniki"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getIngredientXpath()).getText());
+        System.out.println("Skladniki"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getInstructionsXpath()).getText());
+
+*/
         driver.close();
         logger.info("webscraping zakonczony");
     }
