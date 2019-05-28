@@ -7,19 +7,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.teleinformatyka.computations.RecipeTagsService;
+import org.teleinformatyka.computations.RecipeTagsServiceSimpleRecipes;
+import org.teleinformatyka.model.RecipeTags;
 
 import java.io.*;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
     static final Logger logger = Logger.getLogger(Main.class);
+
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -31,7 +31,7 @@ public class Main {
         logger.info(projectPath);
         logger.info(projectPath + "/drivers/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+       WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
 
         //String url = "/przepis/jajka-faszerowane-tunczykiem";
         //int strona = 0;
@@ -120,27 +120,29 @@ public class Main {
 */
 
         //simplerecipes;
-        driver.get("https://www.simplyrecipes.com/recipes/pasta_with_spinach_artichokes_and_ricotta/");
-
-RecipeTags recipeTags=new RecipeTags();
-recipeTags.setTitleClass(".recipe-callout");
-recipeTags.setIngredientsClass(".entry-details.recipe-ingredients");
-recipeTags.setInstructionsClass(".entry-details.recipe-method.instructions");
-        System.out.println("\n"+"Tytuł"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).findElement(By.tagName("h2")).getText());
-        System.out.println("\n"+"Skladniki"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
-        System.out.println("\n"+"Skladniki"+"\n"+((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
+        RecipeTagsService recipeTagsService=new RecipeTagsServiceSimpleRecipes();
+        RecipeTags recipeTags=new RecipeTags();
+        recipeTags.setRecipeUrl("https://www.simplyrecipes.com/recipes/pasta_with_spinach_artichokes_and_ricotta/");
+        recipeTags.setTitleClass(".recipe-callout");
+        recipeTags.setIngredientsClass(".entry-details.recipe-ingredients");
+        recipeTags.setInstructionsClass(".entry-details.recipe-method.instructions");
 
 
- /*       recipeTags.setTitleXpath("//h2[contains(text(),'Pasta with Spinach, Artichokes and Ricotta Recipe')]");
-recipeTags.setIngredientXpath("//div[@class='entry-details recipe-ingredients']");
-recipeTags.setInstructionsXpath("//div[@id='sr-recipe-method']");
+        System.out.println(recipeTagsService.singleRecipe(driver,recipeTags).toString());
 
 
-        System.out.println("Tytuł"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getTitleXpath()).getText());
-        System.out.println("Skladniki"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getIngredientXpath()).getText());
-        System.out.println("Skladniki"+"\n"+((ChromeDriver) driver).findElementByXPath(recipeTags.getInstructionsXpath()).getText());
+         recipeTagsService.pageOfRecipes(driver,recipeTags,"https://www.simplyrecipes.com/recipes/ingredient/chicken/page/",2).forEach(System.out::println);
 
-*/
+
+
+
+
+
+
+
+
+
+
         driver.close();
         logger.info("webscraping zakonczony");
     }
