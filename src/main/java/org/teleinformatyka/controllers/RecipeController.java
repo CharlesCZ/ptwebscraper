@@ -9,6 +9,7 @@ import org.teleinformatyka.api.model.RecipeTagsPage;
 import org.teleinformatyka.computations.RecipeService;
 
 @RestController
+@RequestMapping("/api/v1")
 public class RecipeController {
 
     private final RecipeService recipeService;
