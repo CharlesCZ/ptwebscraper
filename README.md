@@ -14,10 +14,10 @@ Harmonogram pracy:
 
 - [x] Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
 
-- [ ] wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
+- [x] wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
-- [ ] Prezentacja wyników przeszukiwania
+- [x] Prezentacja wyników przeszukiwania
 
 
 Na wybór tematu zdecydowano się ze względu na wcześniejsze zetknięcie się z tematem jednego z członków zespołu,
