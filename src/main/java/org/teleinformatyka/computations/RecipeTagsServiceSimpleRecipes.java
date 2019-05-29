@@ -11,6 +11,8 @@ import org.teleinformatyka.model.RecipeTagsPage;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
@@ -30,6 +32,24 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
 
     @Override
     public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTagsPage recipeTagsPage) {
+        // String to be scanned to find the pattern.
+        String pattern="(https.+recipes/)";
+
+        // Create a Pattern object
+        Pattern r = Pattern.compile(pattern);
+
+        // Now create matcher object.
+        Matcher m = r.matcher(recipeTagsPage.getUrl());
+        if (m.find( )) {
+            System.out.println("Found value: " + m.group(0) );
+
+        }else {
+            System.out.println("NO MATCH");
+        }
+
+
+
+
 
 
 
@@ -39,7 +59,7 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
         List<String> recipesLinkList1 = listOfInputElements1.stream()
                 .map(webElement -> webElement.getAttribute("href"))
                 .filter(Objects::nonNull)
-                .filter(s -> s.contains("https://www.simplyrecipes.com/recipes/"))
+                .filter(s -> s.contains(m.group(0)))
                 .distinct()
                 .collect(Collectors.toList());
 
