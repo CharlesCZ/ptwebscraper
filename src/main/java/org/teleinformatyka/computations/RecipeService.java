@@ -9,19 +9,19 @@ import java.util.List;
 
 public interface RecipeService {
 
-    Recipe singleRecipe(WebDriver webDriver, RecipeTags recipeTags);
+    Recipe singleRecipe(RecipeTags recipeTags);
 
-    List<Recipe> pageOfRecipes(WebDriver webDriver, RecipeTagsPage recipeTagsPage);
+    List<Recipe> pageOfRecipes(RecipeTagsPage recipeTagsPage);
 
 
     List<Recipe> findAllRecipes();
 
 
 
-    Recipe singleRecipeAniaGotuje(WebDriver webDriver, RecipeTags recipeTags);
+    Recipe singleRecipeAniaGotuje( RecipeTags recipeTags);
 
 
-    List<Recipe> pageOfRecipesAniaGotuje(WebDriver webDriver, RecipeTagsPage recipeTagsPage);
+    List<Recipe> pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage);
 
 
 

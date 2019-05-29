@@ -17,11 +17,11 @@ public class Bootstrap implements CommandLineRunner {
 
 
 private final RecipeService recipeService;
-private final  WebDriver driver;
 
-    public Bootstrap(RecipeService recipeService, WebDriver webDriver) {
+
+    public Bootstrap(RecipeService recipeService) {
         this.recipeService = recipeService;
-        this.driver = webDriver;
+
     }
 
 
@@ -44,13 +44,13 @@ private final  WebDriver driver;
         recipeTags.setInstructionsClass(".entry-details.recipe-method.instructions");
 
 
-        System.out.println(recipeService.singleRecipe(driver,recipeTags).toString());
+        System.out.println(recipeService.singleRecipe(recipeTags).toString());
 
       RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
       recipeTagsPage.setRecipeTags(recipeTags);
       recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/2");
       recipeTagsPage.setPageLinkTags("entry-list");
-         recipeService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
+         recipeService.pageOfRecipes(recipeTagsPage).forEach(System.out::println);
 
         System.out.println("##########################");
 //https://www.bbc.com/food/recipes
@@ -62,7 +62,7 @@ private final  WebDriver driver;
         recipeTags2.setInstructionsClass(".recipe-method__list");
 
 
-        System.out.println(recipeService.singleRecipe(driver,recipeTags2).toString());
+        System.out.println(recipeService.singleRecipe(recipeTags2).toString());
 
 
 
@@ -70,7 +70,7 @@ private final  WebDriver driver;
         recipeTagsPage2.setRecipeTags(recipeTags2);
         recipeTagsPage2.setUrl("https://www.bbc.com/food/search?occasions=eid_el-fitr");
         recipeTagsPage2.setPageLinkTags("loading-overlay");
-        recipeService.pageOfRecipes(driver,recipeTagsPage2).forEach(System.out::println);
+        recipeService.pageOfRecipes(recipeTagsPage2).forEach(System.out::println);
 
 
      //   driver.close();

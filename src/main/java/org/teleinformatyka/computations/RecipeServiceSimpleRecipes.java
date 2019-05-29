@@ -21,14 +21,16 @@ import java.util.stream.Collectors;
 public class RecipeServiceSimpleRecipes implements RecipeService {
 
 private final RecipeRepository recipeRepository;
+    private final  WebDriver driver;
 
-    public RecipeServiceSimpleRecipes(RecipeRepository recipeRepository) {
+    public RecipeServiceSimpleRecipes(RecipeRepository recipeRepository, WebDriver driver) {
         this.recipeRepository = recipeRepository;
+        this.driver = driver;
     }
 
 
     @Override
-    public Recipe singleRecipe(WebDriver driver, RecipeTags recipeTags) {
+    public Recipe singleRecipe( RecipeTags recipeTags) {
 
         driver.get(recipeTags.getRecipeUrl());
 
@@ -43,7 +45,7 @@ Recipe returnedRecipe=recipeRepository.save(recipe);
     }
 
     @Override
-    public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTagsPage recipeTagsPage) {
+    public List<Recipe> pageOfRecipes( RecipeTagsPage recipeTagsPage) {
 
         driver.get(recipeTagsPage.getUrl());
         List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName(recipeTagsPage.getPageLinkTags()).findElements(By.tagName("a"));
