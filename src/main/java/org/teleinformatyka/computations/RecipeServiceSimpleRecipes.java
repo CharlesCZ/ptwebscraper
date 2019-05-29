@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.teleinformatyka.model.Recipe;
-import org.teleinformatyka.model.RecipeTags;
-import org.teleinformatyka.model.RecipeTagsPage;
+import org.springframework.stereotype.Service;
+import org.teleinformatyka.api.model.RecipeTagsPage;
+import org.teleinformatyka.domain.Recipe;
+import org.teleinformatyka.api.model.RecipeTags;
+import org.teleinformatyka.repositories.RecipeRepository;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +17,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
+@Service
+public class RecipeServiceSimpleRecipes implements RecipeService {
+
+private final RecipeRepository recipeRepository;
+
+    public RecipeServiceSimpleRecipes(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
 
     @Override
@@ -27,13 +36,14 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
         recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).getText());
         recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
        recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
-        return recipe;
+Recipe returnedRecipe=recipeRepository.save(recipe);
+
+
+        return returnedRecipe;
     }
 
     @Override
     public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTagsPage recipeTagsPage) {
-        // String to be scanned to find the pattern.
-
 
         driver.get(recipeTagsPage.getUrl());
         List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName(recipeTagsPage.getPageLinkTags()).findElements(By.tagName("a"));
@@ -50,13 +60,11 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
 
                  return    m.find();
                 })
-          //      .filter(s -> s.contains("https://www."))
-            //    .filter(s -> s.contains("/recipes/"))
                 .distinct()
                 .collect(Collectors.toList());
 
 
-List<Recipe> recipeList=new LinkedList<>();
+        List<Recipe> recipeList=new LinkedList<>();
         for (int i = 0; i < recipesLinkList1.size(); i++) {
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
@@ -68,8 +76,24 @@ List<Recipe> recipeList=new LinkedList<>();
             driver.navigate().back();
         }
 
+    List<Recipe> returnedListRecipes=recipeRepository.saveAll(recipeList);
+        return returnedListRecipes;
+    }
 
-        return recipeList;
+    @Override
+    public List<Recipe> findAllRecipes() {
+        return recipeRepository.findAll();
+
+    }
+
+    @Override
+    public Recipe singleRecipeAniaGotuje(WebDriver webDriver, RecipeTags recipeTags) {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> pageOfRecipesAniaGotuje(WebDriver webDriver, RecipeTagsPage recipeTagsPage) {
+        return null;
     }
 
 

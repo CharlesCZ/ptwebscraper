@@ -1,19 +1,10 @@
-package org.teleinformatyka.model;
+package org.teleinformatyka.api.model;
 
 public class RecipeTagsPage {
 
- private RecipeTags recipeTags;
- private String url;
- private String pageLinkTags;
-
-
-    public String getPageLinkTags() {
-        return pageLinkTags;
-    }
-
-    public void setPageLinkTags(String pageLinkTags) {
-        this.pageLinkTags = pageLinkTags;
-    }
+    private RecipeTags recipeTags;
+    private String url;
+    private String pageLinkTags;
 
     public RecipeTags getRecipeTags() {
         return recipeTags;
@@ -29,5 +20,13 @@ public class RecipeTagsPage {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPageLinkTags() {
+        return pageLinkTags;
+    }
+
+    public void setPageLinkTags(String pageLinkTags) {
+        this.pageLinkTags = pageLinkTags;
     }
 }

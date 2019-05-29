@@ -1,4 +1,4 @@
-package org.teleinformatyka.model;
+package org.teleinformatyka.api.model;
 
 public class RecipeTags {
 
@@ -10,6 +10,18 @@ public class RecipeTags {
     private String instructionsClass;
     private String instructionsXPath;
 
+    public RecipeTags() {
+    }
+
+    public RecipeTags(String recipeUrl, String titleClass, String titleXPath, String ingredientsClass, String ingredientXPath, String instructionsClass, String instructionsXPath) {
+        this.recipeUrl = recipeUrl;
+        this.titleClass = titleClass;
+        this.titleXPath = titleXPath;
+        this.ingredientsClass = ingredientsClass;
+        this.ingredientXPath = ingredientXPath;
+        this.instructionsClass = instructionsClass;
+        this.instructionsXPath = instructionsXPath;
+    }
 
     public String getRecipeUrl() {
         return recipeUrl;
