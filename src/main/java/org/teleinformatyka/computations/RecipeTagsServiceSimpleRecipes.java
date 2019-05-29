@@ -21,7 +21,7 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
         driver.get(recipeTags.getRecipeUrl());
 
         Recipe recipe=new Recipe();
-        recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).findElement(By.tagName("h2")).getText());
+        recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).getText());
         recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
        recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
         return recipe;
@@ -48,7 +48,7 @@ List<Recipe> recipeList=new LinkedList<>();
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
             Recipe recipe=new Recipe();
-            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).findElement(By.tagName("h2")).getText());
+            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).getText());
             recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
             recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
           recipeList.add(recipe);

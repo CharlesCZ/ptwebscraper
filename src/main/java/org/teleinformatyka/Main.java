@@ -123,20 +123,26 @@ public class Main {
         RecipeTagsService recipeTagsService=new RecipeTagsServiceSimpleRecipes();
         RecipeTags recipeTags=new RecipeTags();
         recipeTags.setRecipeUrl("https://www.simplyrecipes.com/recipes/pasta_with_spinach_artichokes_and_ricotta/");
-        recipeTags.setTitleClass(".recipe-callout");
+        recipeTags.setTitleClass(".entry-title");
         recipeTags.setIngredientsClass(".entry-details.recipe-ingredients");
         recipeTags.setInstructionsClass(".entry-details.recipe-method.instructions");
 
 
         System.out.println(recipeTagsService.singleRecipe(driver,recipeTags).toString());
 
-
-         recipeTagsService.pageOfRecipes(driver,recipeTags,"https://www.simplyrecipes.com/recipes/ingredient/chicken/page/",2).forEach(System.out::println);
-
-
+        System.out.println("##########################");
+ //        recipeTagsService.pageOfRecipes(driver,recipeTags,"https://www.simplyrecipes.com/recipes/ingredient/chicken/page/",2).forEach(System.out::println);
 
 
+//https://www.bbc.com/food/recipes
 
+        RecipeTags recipeTags2=new RecipeTags();
+        recipeTags2.setRecipeUrl("https://www.bbc.com/food/recipes/stuffed_chicken_breasts_14926");
+        recipeTags2.setTitleClass(".gel-trafalgar.content-title__text");
+        recipeTags2.setIngredientsClass(".recipe-ingredients__list");
+        recipeTags2.setInstructionsClass(".recipe-method__list");
+
+        System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
 
 
 
