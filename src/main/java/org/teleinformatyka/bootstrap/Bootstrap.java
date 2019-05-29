@@ -1,26 +1,27 @@
 package org.teleinformatyka.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.teleinformatyka.api.model.RecipeTagsPage;
 import org.teleinformatyka.computations.RecipeService;
 import org.teleinformatyka.api.model.RecipeTags;
 
-
+@Slf4j
 @Component
 public class Bootstrap implements CommandLineRunner {
 
-    static final Logger logger = Logger.getLogger(Bootstrap.class);
+
 
 private final RecipeService recipeService;
+private final  WebDriver driver;
 
-    public Bootstrap(RecipeService recipeService) {
+    public Bootstrap(RecipeService recipeService, WebDriver webDriver) {
         this.recipeService = recipeService;
+        this.driver = webDriver;
     }
 
 
@@ -30,12 +31,7 @@ private final RecipeService recipeService;
 
 
         BasicConfigurator.configure();
-        logger.info("rozpoczecie webscraping");
-        String projectPath = System.getProperty("user.dir");
-        logger.info(projectPath);
-        logger.info(projectPath + "/drivers/chromedriver/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver/chromedriver.exe");
-       WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+
 
 
 
@@ -77,7 +73,7 @@ private final RecipeService recipeService;
         recipeService.pageOfRecipes(driver,recipeTagsPage2).forEach(System.out::println);
 
 
-        driver.close();
-        logger.info("webscraping zakonczony");
+     //   driver.close();
+        log.info("webscraping zakonczony");
     }
 }
