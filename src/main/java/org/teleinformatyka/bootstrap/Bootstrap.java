@@ -10,6 +10,8 @@ import org.teleinformatyka.api.model.RecipeTagsPage;
 import org.teleinformatyka.computations.RecipeService;
 import org.teleinformatyka.api.model.RecipeTags;
 
+import java.util.Arrays;
+
 @Slf4j
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -47,7 +49,7 @@ private final RecipeService recipeService;
         System.out.println(recipeService.singleRecipe(recipeTags).toString());
 
       RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
-      recipeTagsPage.setRecipeTags(recipeTags);
+      recipeTagsPage.setRecipeTags(Arrays.asList(recipeTags));
       recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/2");
       recipeTagsPage.setPageLinkTags("entry-list");
          recipeService.pageOfRecipes(recipeTagsPage).forEach(System.out::println);
@@ -67,7 +69,7 @@ private final RecipeService recipeService;
 
 
         RecipeTagsPage recipeTagsPage2=new RecipeTagsPage();
-        recipeTagsPage2.setRecipeTags(recipeTags2);
+        recipeTagsPage2.setRecipeTags(Arrays.asList(recipeTags2));
         recipeTagsPage2.setUrl("https://www.bbc.com/food/search?occasions=eid_el-fitr");
         recipeTagsPage2.setPageLinkTags("loading-overlay");
         recipeService.pageOfRecipes(recipeTagsPage2).forEach(System.out::println);

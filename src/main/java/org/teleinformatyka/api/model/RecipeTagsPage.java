@@ -1,16 +1,18 @@
 package org.teleinformatyka.api.model;
 
+import java.util.List;
+
 public class RecipeTagsPage {
 
-    private RecipeTags recipeTags;
+    private List<RecipeTags> recipeTags;
     private String url;
     private String pageLinkTags;
 
-    public RecipeTags getRecipeTags() {
+    public List<RecipeTags> getRecipeTags() {
         return recipeTags;
     }
 
-    public void setRecipeTags(RecipeTags recipeTags) {
+    public void setRecipeTags(List<RecipeTags> recipeTags) {
         this.recipeTags = recipeTags;
     }
 
@@ -28,5 +30,14 @@ public class RecipeTagsPage {
 
     public void setPageLinkTags(String pageLinkTags) {
         this.pageLinkTags = pageLinkTags;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeTagsPage{" +
+                "recipeTags=" + recipeTags +
+                ", url='" + url + '\'' +
+                ", pageLinkTags='" + pageLinkTags + '\'' +
+                '}';
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
+import org.teleinformatyka.api.mapper.RecipeMapper;
 import org.teleinformatyka.api.model.RecipeTagsPage;
 import org.teleinformatyka.domain.Recipe;
 import org.teleinformatyka.api.model.RecipeTags;
@@ -22,15 +23,17 @@ public class RecipeServiceSimpleRecipes implements RecipeService {
 
 private final RecipeRepository recipeRepository;
     private final  WebDriver driver;
+private final RecipeMapper recipeMapper;
 
-    public RecipeServiceSimpleRecipes(RecipeRepository recipeRepository, WebDriver driver) {
+    public RecipeServiceSimpleRecipes(RecipeRepository recipeRepository, WebDriver driver, RecipeMapper recipeMapper) {
         this.recipeRepository = recipeRepository;
         this.driver = driver;
+        this.recipeMapper = recipeMapper;
     }
 
 
     @Override
-    public Recipe singleRecipe( RecipeTags recipeTags) {
+    public RecipeTags singleRecipe( RecipeTags recipeTags) {
 
         driver.get(recipeTags.getRecipeUrl());
 
@@ -38,14 +41,14 @@ private final RecipeRepository recipeRepository;
         recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).getText());
         recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
        recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
-Recipe returnedRecipe=recipeRepository.save(recipe);
 
 
-        return returnedRecipe;
+
+        return recipeMapper.recipeToRecipeTags(recipeRepository.save(recipe));
     }
 
     @Override
-    public List<Recipe> pageOfRecipes( RecipeTagsPage recipeTagsPage) {
+    public List<RecipeTags> pageOfRecipes( RecipeTagsPage recipeTagsPage) {
 
         driver.get(recipeTagsPage.getUrl());
         List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName(recipeTagsPage.getPageLinkTags()).findElements(By.tagName("a"));
@@ -71,30 +74,30 @@ Recipe returnedRecipe=recipeRepository.save(recipe);
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
             Recipe recipe=new Recipe();
-            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getTitleClass())).getText());
-            recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
-            recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
+            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().get(0).getTitleClass())).getText());
+            recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().get(0).getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
+            recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().get(0).getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
           recipeList.add(recipe);
             driver.navigate().back();
         }
 
-    List<Recipe> returnedListRecipes=recipeRepository.saveAll(recipeList);
-        return returnedListRecipes;
+
+        return recipeRepository.saveAll(recipeList).stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList());
     }
 
     @Override
-    public List<Recipe> findAllRecipes() {
-        return recipeRepository.findAll();
+    public List<RecipeTags> findAllRecipes() {
+        return recipeRepository.findAll().stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList());
 
     }
 
     @Override
-    public Recipe singleRecipeAniaGotuje(WebDriver webDriver, RecipeTags recipeTags) {
+    public RecipeTags singleRecipeAniaGotuje(RecipeTags recipeTags) {
         return null;
     }
 
     @Override
-    public List<Recipe> pageOfRecipesAniaGotuje(WebDriver webDriver, RecipeTagsPage recipeTagsPage) {
+    public List<RecipeTags> pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage) {
         return null;
     }
 
