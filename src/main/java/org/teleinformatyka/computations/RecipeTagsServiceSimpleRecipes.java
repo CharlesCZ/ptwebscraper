@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.teleinformatyka.model.Recipe;
 import org.teleinformatyka.model.RecipeTags;
+import org.teleinformatyka.model.RecipeTagsPage;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,11 +29,11 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
     }
 
     @Override
-    public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTags recipeTags, String url,int siteNum) {
+    public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTagsPage recipeTagsPage) {
 
 
 
-        driver.get(url+siteNum);
+        driver.get(recipeTagsPage.getUrl());
         List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName("entry-list").findElements(By.tagName("a"));
 
         List<String> recipesLinkList1 = listOfInputElements1.stream()
@@ -48,9 +49,9 @@ List<Recipe> recipeList=new LinkedList<>();
             String name = recipesLinkList1.get(i);
             driver.navigate().to(name);
             Recipe recipe=new Recipe();
-            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getTitleClass())).getText());
-            recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
-            recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTags.getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
+            recipe.setTitle(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getTitleClass())).getText());
+            recipe.setIngredients(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getIngredientsClass())).getText().replaceAll("[A-Z]{3,}",""));
+            recipe.setInstructions(((ChromeDriver) driver).findElement(By.cssSelector(recipeTagsPage.getRecipeTags().getInstructionsClass())).getText().replaceAll("[A-Z]{3,}",""));
           recipeList.add(recipe);
             driver.navigate().back();
         }

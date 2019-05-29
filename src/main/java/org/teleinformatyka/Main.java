@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.teleinformatyka.computations.RecipeTagsService;
 import org.teleinformatyka.computations.RecipeTagsServiceSimpleRecipes;
 import org.teleinformatyka.model.RecipeTags;
+import org.teleinformatyka.model.RecipeTagsPage;
 
 import java.io.*;
 import java.util.List;
@@ -130,10 +131,12 @@ public class Main {
 
         System.out.println(recipeTagsService.singleRecipe(driver,recipeTags).toString());
 
+      RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
+      recipeTagsPage.setRecipeTags(recipeTags);
+      recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/"+2);
+         recipeTagsService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
+
         System.out.println("##########################");
- //        recipeTagsService.pageOfRecipes(driver,recipeTags,"https://www.simplyrecipes.com/recipes/ingredient/chicken/page/",2).forEach(System.out::println);
-
-
 //https://www.bbc.com/food/recipes
 
         RecipeTags recipeTags2=new RecipeTags();
@@ -142,7 +145,7 @@ public class Main {
         recipeTags2.setIngredientsClass(".recipe-ingredients__list");
         recipeTags2.setInstructionsClass(".recipe-method__list");
 
-        System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
+      //  System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
 
 
 
