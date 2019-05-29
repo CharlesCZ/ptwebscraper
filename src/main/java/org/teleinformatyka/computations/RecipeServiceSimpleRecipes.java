@@ -100,13 +100,18 @@ recipeTagsPage.setRecipeTags(recipeRepository.saveAll(recipeList)
 
     @Override
     public RecipeTags singleRecipeAniaGotuje(RecipeTags recipeTags) {
+        //TODO ZROBCIE TO
+
         return null;
     }
 
     @Override
-    public RecipeTagsPage pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage) {
+    public RecipeTagsPage pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage)
+    {
+        //TODO ZROBCIE TO
         return null;
     }
 
 
 }
+
