@@ -31,7 +31,7 @@ podział prac:
 - Jan Śmigielski- Wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
-- Cezary Czekalski- Przygotowanie webDriver Selenium dla java,zprojektowanie i napisanie API, nadzór prac,   
+- Cezary Czekalski- Przygotowanie webDriver Selenium dla java,zprojektowanie i napisanie API, nadzór prac  
 
 - Marcin Hilt- Analiza statyczna strony-Wyszukiwanie na stronie wyznaczonego znacznika, albo innego symbolu szukanego
 
