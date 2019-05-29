@@ -25,6 +25,12 @@ public class RecipeController {
        return new ResponseEntity<>( recipeService.singleRecipe(recipeTags), HttpStatus.CREATED);
     }
 
+    @PostMapping("/recipePage")
+    public ResponseEntity<RecipeTagsPage> saveRecipePage(@RequestBody RecipeTagsPage recipeTagsPage){
+
+        return new ResponseEntity<>( recipeService.pageOfRecipes(recipeTagsPage), HttpStatus.CREATED);
+    }
+
 
     @GetMapping("/recipe")
     @ResponseStatus(HttpStatus.OK)
