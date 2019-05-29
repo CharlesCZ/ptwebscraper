@@ -17,6 +17,8 @@ Harmonogram pracy:
 - [x] wyszukiwanie przepisów na stronach zgodnych z structured data opisanych przez  schema.org
 m.in. www.aniagotuje.pl, www.simplyrecipes.com
 
+- [x] Napisanie API, nadzór prac 
+
 - [x] Prezentacja wyników przeszukiwania
 
 
