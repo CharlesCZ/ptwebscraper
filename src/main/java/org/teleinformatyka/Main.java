@@ -134,6 +134,7 @@ public class Main {
       RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
       recipeTagsPage.setRecipeTags(recipeTags);
       recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/"+2);
+      recipeTagsPage.setPageLinkTags("entry-list");
          recipeTagsService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
 
         System.out.println("##########################");
@@ -145,7 +146,8 @@ public class Main {
         recipeTags2.setIngredientsClass(".recipe-ingredients__list");
         recipeTags2.setInstructionsClass(".recipe-method__list");
 
-      //  System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
+
+        System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
 
 
 

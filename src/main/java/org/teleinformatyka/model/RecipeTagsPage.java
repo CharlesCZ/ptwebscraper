@@ -2,8 +2,18 @@ package org.teleinformatyka.model;
 
 public class RecipeTagsPage {
 
- private    RecipeTags recipeTags;
-    private String url;
+ private RecipeTags recipeTags;
+ private String url;
+ private String pageLinkTags;
+
+
+    public String getPageLinkTags() {
+        return pageLinkTags;
+    }
+
+    public void setPageLinkTags(String pageLinkTags) {
+        this.pageLinkTags = pageLinkTags;
+    }
 
     public RecipeTags getRecipeTags() {
         return recipeTags;

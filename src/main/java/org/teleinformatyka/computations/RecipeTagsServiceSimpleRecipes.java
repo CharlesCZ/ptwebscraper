@@ -54,7 +54,7 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
 
 
         driver.get(recipeTagsPage.getUrl());
-        List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName("entry-list").findElements(By.tagName("a"));
+        List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName(recipeTagsPage.getPageLinkTags()).findElements(By.tagName("a"));
 
         List<String> recipesLinkList1 = listOfInputElements1.stream()
                 .map(webElement -> webElement.getAttribute("href"))
