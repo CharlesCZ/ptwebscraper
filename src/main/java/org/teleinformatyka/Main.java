@@ -2,9 +2,7 @@ package org.teleinformatyka;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.teleinformatyka.computations.RecipeTagsService;
@@ -12,10 +10,7 @@ import org.teleinformatyka.computations.RecipeTagsServiceSimpleRecipes;
 import org.teleinformatyka.model.RecipeTags;
 import org.teleinformatyka.model.RecipeTagsPage;
 
-import java.io.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.io.IOException;
 
 public class Main {
 
@@ -134,7 +129,7 @@ public class Main {
       RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
       recipeTagsPage.setRecipeTags(recipeTags);
       recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/"+2);
-         recipeTagsService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
+        //  recipeTagsService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
 
         System.out.println("##########################");
 //https://www.bbc.com/food/recipes
@@ -145,7 +140,7 @@ public class Main {
         recipeTags2.setIngredientsClass(".recipe-ingredients__list");
         recipeTags2.setInstructionsClass(".recipe-method__list");
 
-      //  System.out.println(recipeTagsService.singleRecipe(driver,recipeTags2).toString());
+        System.out.println(recipeTagsService.singleRecipe(driver, recipeTags2).toString());
 
 
 
