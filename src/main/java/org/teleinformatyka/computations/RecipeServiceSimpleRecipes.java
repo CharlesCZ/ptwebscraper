@@ -48,7 +48,7 @@ private final RecipeMapper recipeMapper;
     }
 
     @Override
-    public List<RecipeTags> pageOfRecipes( RecipeTagsPage recipeTagsPage) {
+    public RecipeTagsPage pageOfRecipes( RecipeTagsPage recipeTagsPage) {
 
         driver.get(recipeTagsPage.getUrl());
         List<WebElement> listOfInputElements1 = ((ChromeDriver) driver).findElementByClassName(recipeTagsPage.getPageLinkTags()).findElements(By.tagName("a"));
@@ -81,13 +81,20 @@ private final RecipeMapper recipeMapper;
             driver.navigate().back();
         }
 
+recipeTagsPage.setRecipeTags(recipeRepository.saveAll(recipeList)
+        .stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList()));
 
-        return recipeRepository.saveAll(recipeList).stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList());
+        return recipeTagsPage;
     }
 
     @Override
-    public List<RecipeTags> findAllRecipes() {
-        return recipeRepository.findAll().stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList());
+    public RecipeTagsPage findAllRecipes() {
+        RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
+
+        recipeTagsPage.setRecipeTags(recipeRepository.findAll()
+                .stream().map(recipeMapper::recipeToRecipeTags).collect(Collectors.toList()));
+
+        return recipeTagsPage;
 
     }
 
@@ -97,7 +104,7 @@ private final RecipeMapper recipeMapper;
     }
 
     @Override
-    public List<RecipeTags> pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage) {
+    public RecipeTagsPage pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage) {
         return null;
     }
 

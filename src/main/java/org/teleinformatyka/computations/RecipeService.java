@@ -11,17 +11,17 @@ public interface RecipeService {
 
     RecipeTags  singleRecipe(RecipeTags recipeTags);
 
-    List<RecipeTags> pageOfRecipes(RecipeTagsPage recipeTagsPage);
+    RecipeTagsPage pageOfRecipes(RecipeTagsPage recipeTagsPage);
 
 
-    List<RecipeTags> findAllRecipes();
+    RecipeTagsPage findAllRecipes();
 
 
 
     RecipeTags  singleRecipeAniaGotuje( RecipeTags recipeTags);
 
 
-    List<RecipeTags> pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage);
+    RecipeTagsPage pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage);
 
 
 

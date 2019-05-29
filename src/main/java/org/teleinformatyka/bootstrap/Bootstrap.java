@@ -52,7 +52,7 @@ private final RecipeService recipeService;
       recipeTagsPage.setRecipeTags(Arrays.asList(recipeTags));
       recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/2");
       recipeTagsPage.setPageLinkTags("entry-list");
-         recipeService.pageOfRecipes(recipeTagsPage).forEach(System.out::println);
+         recipeService.pageOfRecipes(recipeTagsPage).getRecipeTags().forEach(System.out::println);
 
         System.out.println("##########################");
 //https://www.bbc.com/food/recipes
@@ -72,7 +72,7 @@ private final RecipeService recipeService;
         recipeTagsPage2.setRecipeTags(Arrays.asList(recipeTags2));
         recipeTagsPage2.setUrl("https://www.bbc.com/food/search?occasions=eid_el-fitr");
         recipeTagsPage2.setPageLinkTags("loading-overlay");
-        recipeService.pageOfRecipes(recipeTagsPage2).forEach(System.out::println);
+        recipeService.pageOfRecipes(recipeTagsPage2).getRecipeTags().forEach(System.out::println);
 
 
      //   driver.close();
