@@ -33,24 +33,6 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
     @Override
     public List<Recipe> pageOfRecipes(WebDriver driver, RecipeTagsPage recipeTagsPage) {
         // String to be scanned to find the pattern.
-        String pattern="(https.+recipes/)";
-
-        // Create a Pattern object
-        Pattern r = Pattern.compile(pattern);
-
-        // Now create matcher object.
-        Matcher m = r.matcher(recipeTagsPage.getUrl());
-        if (m.find( )) {
-            System.out.println("Found value: " + m.group(0) );
-
-        }else {
-            System.out.println("NO MATCH");
-        }
-
-
-
-
-
 
 
         driver.get(recipeTagsPage.getUrl());
@@ -59,7 +41,17 @@ public class RecipeTagsServiceSimpleRecipes implements RecipeTagsService {
         List<String> recipesLinkList1 = listOfInputElements1.stream()
                 .map(webElement -> webElement.getAttribute("href"))
                 .filter(Objects::nonNull)
-                .filter(s -> s.contains(m.group(0)))
+                .filter(recipe->{
+                    // String to be scanned to find the pattern.
+                    String pattern="(https.+recipes/)";
+                    // Create a Pattern object
+                    Pattern r = Pattern.compile(pattern);
+                    Matcher m = r.matcher(recipe);
+
+                 return    m.find();
+                })
+          //      .filter(s -> s.contains("https://www."))
+            //    .filter(s -> s.contains("/recipes/"))
                 .distinct()
                 .collect(Collectors.toList());
 

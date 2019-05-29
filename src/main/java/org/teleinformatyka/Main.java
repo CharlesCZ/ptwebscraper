@@ -122,7 +122,7 @@ public class Main {
 
         //simplerecipes;
         RecipeTagsService recipeTagsService=new RecipeTagsServiceSimpleRecipes();
-        RecipeTags recipeTags=new RecipeTags();
+       RecipeTags recipeTags=new RecipeTags();
         recipeTags.setRecipeUrl("https://www.simplyrecipes.com/recipes/pasta_with_spinach_artichokes_and_ricotta/");
         recipeTags.setTitleClass(".entry-title");
         recipeTags.setIngredientsClass(".entry-details.recipe-ingredients");
@@ -133,7 +133,7 @@ public class Main {
 
       RecipeTagsPage recipeTagsPage=new RecipeTagsPage();
       recipeTagsPage.setRecipeTags(recipeTags);
-      recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/"+2);
+      recipeTagsPage.setUrl("https://www.simplyrecipes.com/recipes/ingredient/chicken/page/2");
       recipeTagsPage.setPageLinkTags("entry-list");
          recipeTagsService.pageOfRecipes(driver,recipeTagsPage).forEach(System.out::println);
 
@@ -151,7 +151,11 @@ public class Main {
 
 
 
-
+        RecipeTagsPage recipeTagsPage2=new RecipeTagsPage();
+        recipeTagsPage2.setRecipeTags(recipeTags2);
+        recipeTagsPage2.setUrl("https://www.bbc.com/food/search?occasions=eid_el-fitr");
+        recipeTagsPage2.setPageLinkTags("loading-overlay");
+        recipeTagsService.pageOfRecipes(driver,recipeTagsPage2).forEach(System.out::println);
 
 
         driver.close();
