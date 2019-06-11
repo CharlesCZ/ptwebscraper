@@ -30,7 +30,23 @@ public class RecipeController {
     public ResponseEntity<RecipeTagsPage> saveRecipePage(@RequestBody RecipeTagsPage recipeTagsPage){
 
         return new ResponseEntity<>( recipeService.pageOfRecipes(recipeTagsPage), HttpStatus.CREATED);
+
     }
+
+
+    @PostMapping("/Aniagotuje/recipe")
+    public ResponseEntity<RecipeTags> saveOneRecipeAniaGotuje(@RequestBody RecipeTags recipeTags){
+
+        return new ResponseEntity<>( recipeService.singleRecipeAniaGotuje(recipeTags), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/Aniagotuje/recipePage")
+    public ResponseEntity<RecipeTagsPage> saveRecipePageAniaGotuje(@RequestBody RecipeTagsPage recipeTagsPage){
+
+        return new ResponseEntity<>( recipeService.pageOfRecipesAniaGotuje(recipeTagsPage), HttpStatus.CREATED);
+    }
+
+
 
 
     @GetMapping("/recipe")

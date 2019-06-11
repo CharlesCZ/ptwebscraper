@@ -100,7 +100,7 @@ recipeTagsPage.setRecipeTags(recipeRepository.saveAll(recipeList)
 
     @Override
     public RecipeTags singleRecipeAniaGotuje(RecipeTags recipeTags) {
-        //TODO ZROBCIE TO
+        //TODO ZROBCIE TO ALE BEZ UZYCIA XPATH
 
         return null;
     }
@@ -108,7 +108,7 @@ recipeTagsPage.setRecipeTags(recipeRepository.saveAll(recipeList)
     @Override
     public RecipeTagsPage pageOfRecipesAniaGotuje(RecipeTagsPage recipeTagsPage)
     {
-        //TODO ZROBCIE TO
+        //TODO ZROBCIE TO ALE BEZ UZYCIA XPATH
         return null;
     }
 
